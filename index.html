@@ -1,24 +1,18 @@
 python3 - <<'PY'
 from pathlib import Path
+import re
 
 p = Path("/home/claude/portfolio/index.html")
 html = p.read_text()
 
-# Markalar listesini komple kaldır
-start = html.find('<section class="clients" id="clients">')
-end = html.find('</section>', start)
-if start != -1 and end != -1:
-    html = html[:start] + html[end + len('</section>'):]
-
 # Menüden Markalar kaldır
-html = html.replace('<li><a href="#clients">Markalar</a></li>\n        ', '')
+html = html.replace('        <li><a href="#clients">Markalar</a></li>\n', '')
 
-# Hero boşluğu düzelt
-html = html.replace(
-'''main{padding-top:72px}''',
-'''main{padding-top:0}'''
-)
+# Markalar listesini komple kaldır
+html = re.sub(r'\n<section class="clients" id="clients">.*?</section>\n', '\n', html, flags=re.S)
 
+# Üst beyaz boşluğu ve hero hizasını düzelt
+html = html.replace('main{padding-top:72px}', 'main{padding-top:0}')
 html = html.replace(
 '''  min-height:calc(100vh - 72px);
   display:grid;
@@ -30,104 +24,54 @@ html = html.replace(
 '''  min-height:100vh;
   display:grid;
   grid-template-columns:.9fr 1.1fr;
-  gap:96px;
+  gap:84px;
   align-items:center;
-  padding-top:72px;
+  padding-top:88px;
   padding-bottom:56px;'''
 )
 
-# İşlerim başlığını daha yukarı al
-html = html.replace(
-'''  padding:70px 0 120px;''',
-'''  padding:40px 0 120px;'''
-)
+html = html.replace('  margin-top:18px;', '  margin-top:8px;', 1)
 
 # Selected Project yazılarını kaldır
-html = html.replace('<p class="project-kicker">01 / Selected Project</p>', '')
-html = html.replace('<p class="project-kicker">02 / Selected Project</p>', '')
-html = html.replace('<p class="project-kicker">03 / Selected Project</p>', '')
-html = html.replace('<p class="project-kicker">04 / Selected Project</p>', '')
+html = re.sub(r'<p class="project-kicker">(\d+) / Selected Project</p>', r'<p class="project-kicker">\1</p>', html)
 
-# Marka açıklama yazılarını kaldır
-import re
-html = re.sub(r'<div class="project-info">\s*<p>.*?</p>\s*<div class="project-tags">', '<div class="project-info">\n          <div class="project-tags">', html, flags=re.S)
+# Marka açıklama paragraflarını kaldır
+html = re.sub(r'\s*<p>.*?</p>\n\s*<div class="project-tags">', '\n          <div class="project-tags">', html, flags=re.S)
 
-# Work kartlarını sadece hero visual yap + kategori butonları ekle
+# Her proje taglerini istenen butonlara çevir
 html = re.sub(
-r'''<div class="project-grid">\s*<div class="visual large" data-label="([^"]+)"></div>\s*<div class="project-side">.*?</div>\s*</div>''',
-r'''<div class="project-grid single">
+    r'<div class="project-tags">.*?</div>',
+    '''<div class="project-tags">
+            <span>Branding</span><span>Social Media</span><span>Advertising</span><span>AI Video Works</span>
+          </div>''',
+    html,
+    flags=re.S
+)
+
+# Her projede sadece Hero Visual kalsın, sağdaki küçük görseller kalksın
+html = re.sub(
+    r'''<div class="project-grid">\s*
+        <div class="visual large" data-label="[^"]+"></div>\s*
+        <div class="project-side">.*?</div>\s*
+      </div>''',
+    '''<div class="project-grid">
         <div class="visual large" data-label="Hero Visual"></div>
       </div>''',
-html,
-flags=re.S
+    html,
+    flags=re.S
 )
 
-# Ozmo tagleri dahil hepsini istenen butonlara çevir
-html = re.sub(
-r'''<div class="project-tags">.*?</div>''',
-'''<div class="project-tags">
-            <span>Branding</span>
-            <span>Social Media</span>
-            <span>Advertising</span>
-            <span>AI Video Works</span>
-          </div>''',
-html,
-flags=re.S
+# Grid artık tek büyük görsel olsun
+html = html.replace(
+'''  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:18px;''',
+'''  display:block;'''
 )
-
-# CSS eklemeleri
-extra_css = '''
-.project-info{
-  display:flex;
-  align-items:flex-end;
-  justify-content:flex-start;
-}
-
-.project-tags{
-  margin-top:0;
-}
-
-.project-tags span{
-  cursor:pointer;
-  transition:transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease;
-}
-
-.project-tags span:hover{
-  transform:translateY(-3px);
-  background:var(--ink);
-  color:var(--bg);
-  border-color:var(--ink);
-}
-
-.project-grid.single{
-  grid-template-columns:1fr;
-}
-
-.project-grid.single .visual.large{
-  min-height:620px;
-}
-
-.project-head{
-  align-items:end;
-}
-
-.project{
-  padding-top:38px;
-}
-
-.projects-title{
-  margin-bottom:28px;
-}
-
-@media(max-width:900px){
-  .project-grid.single .visual.large{
-    min-height:360px;
-  }
-}
-'''
-html = html.replace('</style>', extra_css + '\n</style>')
 
 p.write_text(html)
-Path("/mnt/user-data/outputs/index.html").write_text(html)
-print("done")
 PY
+
+git add .
+git commit -m "Revise portfolio layout"
+git push
