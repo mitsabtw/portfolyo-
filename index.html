@@ -1,262 +1,223 @@
-python3 - <<'PY'
-from pathlib import Path
+cat > /home/claude/portfolio/index.html << 'HTMLEOF'
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerem Sarıoğlu — Art Director</title>
 
-p = Path("/home/claude/portfolio/index.html")
-html = p.read_text()
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 
-# HERO CSS'i değiştir
-html = html.replace('''
-  .hero{
-    min-height:calc(100vh - 66px);
-    display:grid;
-    grid-template-columns:1.15fr .85fr;
-    gap:70px;
-    align-items:center;
-    padding-top:80px;
-    padding-bottom:80px;
-    border-bottom:1px solid var(--line);
-  }
+<style>
+:root{--bg:#fff;--ink:#141414;--soft:#707070;--line:#e6e6e6;--muted:#f6f4ef}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+h1,h2,h3{font-family:Fraunces,serif;font-weight:600;letter-spacing:-.02em}
 
-  .hero h1{
-    font-size:clamp(3rem,7vw,6.4rem);
-    line-height:.92;
-    margin-top:16px;
-    max-width:9ch;
-  }
-''','''
-  .hero{
-    min-height:calc(100vh - 66px);
-    display:grid;
-    grid-template-columns:minmax(280px,.9fr) minmax(420px,1.1fr);
-    gap:96px;
-    align-items:end;
-    padding-top:120px;
-    padding-bottom:72px;
-    border-bottom:1px solid var(--line);
-  }
+header{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1240px;margin:0 auto;padding:22px 32px;display:flex;justify-content:flex-end}
+nav ul{list-style:none;display:flex;gap:34px}
+nav a{font-size:.92rem;color:var(--soft);border-bottom:1px solid transparent;padding-bottom:3px}
+nav a:hover{color:var(--ink);border-color:var(--ink)}
 
-  .hero-left{
-    position:sticky;
-    bottom:72px;
-  }
+main{padding-top:66px}
+section{scroll-margin-top:90px}
 
-  .hero h1{
-    font-size:clamp(3.8rem,8vw,8.2rem);
-    line-height:.82;
-    margin-top:18px;
-    max-width:8ch;
-  }
+.hero{min-height:calc(100vh - 66px);display:grid;grid-template-columns:.9fr 1.1fr;gap:96px;align-items:end;padding-top:120px;padding-bottom:72px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(4rem,8vw,8.2rem);line-height:.82;margin-top:18px;max-width:8ch}
+.hero-role{margin-top:24px;font-family:'IBM Plex Mono',monospace;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.hero-line{width:76px;height:1px;background:var(--ink);margin-top:28px}
+.hero-copy p{color:var(--soft);font-size:1.03rem;line-height:1.75;margin-bottom:15px}
 
-  .hero-role{
-    margin-top:24px;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.75rem;
-    letter-spacing:.08em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-  }
+.cv-lines{margin-top:34px;border-top:1px solid var(--line)}
+.cv-lines div{display:grid;grid-template-columns:145px 1fr;gap:22px;padding:15px 0;border-bottom:1px solid var(--line)}
+.cv-lines span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)}
+.cv-lines strong{font-weight:500;line-height:1.45}
 
-  .hero-line{
-    width:76px;
-    height:1px;
-    background:var(--ink);
-    margin-top:28px;
-  }
-''')
+.scroll-work{margin-top:42px;display:inline-flex;align-items:center;gap:14px}
+.scroll-work span{font-size:.9rem;color:var(--soft)}
+.scroll-work b{width:46px;height:46px;border:1px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:400;transition:.2s}
+.scroll-work:hover b{transform:translateY(5px);background:var(--ink);color:var(--bg)}
 
-# hero HTML sol tarafı classla
-html = html.replace('''
-  <section class="wrap hero" id="about">
-    <div>
-      <p class="eyebrow">About Me</p>
-      <h1>Kerem Sarıoğlu</h1>
+.clients{border-bottom:1px solid var(--line)}
+.clients-inner{padding-top:100px;padding-bottom:100px;display:grid;grid-template-columns:.8fr 1.2fr;gap:80px}
+.clients-head h2{font-size:clamp(2.2rem,4vw,4rem);line-height:1;margin-top:14px;max-width:9ch}
+.client-list{display:grid;grid-template-columns:1fr 1fr;column-gap:44px;border-top:1px solid var(--line)}
+.client-list div{display:grid;grid-template-columns:46px 1fr;gap:18px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.client-list span{font-family:'IBM Plex Mono',monospace;font-size:.68rem;color:var(--soft)}
+.client-list strong{font-family:Fraunces,serif;font-size:clamp(1.35rem,2.1vw,2rem);font-weight:500;letter-spacing:-.02em}
+
+.work-intro{padding:90px 0 30px}
+.work-intro h2{font-size:clamp(2.4rem,5vw,4.4rem);margin-top:12px}
+.work-intro p{color:var(--soft);margin-top:16px;max-width:58ch;line-height:1.7}
+
+.filter-row{position:sticky;top:66px;z-index:20;background:var(--bg);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0}
+.filter-row .wrap{display:flex;gap:26px;overflow-x:auto}
+.filter-link{white-space:nowrap;font-size:.92rem;color:var(--soft);padding-bottom:4px;border:none;border-bottom:2px solid transparent;background:none;cursor:pointer;font-family:Inter,sans-serif}
+.filter-link.active,.filter-link:hover{color:var(--ink);border-bottom-color:var(--ink)}
+
+.work-grid{padding:54px 0 110px;display:grid;grid-template-columns:repeat(2,1fr);gap:58px 32px}
+.work-media{aspect-ratio:16/10;background:linear-gradient(150deg,#f3f1ec,#e7e4db);position:relative;overflow:hidden}
+.tag-badge{position:absolute;top:14px;left:14px;font-family:'IBM Plex Mono',monospace;font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;background:#fff;padding:5px 10px;color:var(--soft)}
+.ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--soft);transition:.35s}
+.work-card:hover .ph{transform:scale(1.04)}
+.work-meta{padding-top:16px}
+.work-meta h3{font-size:1.35rem;margin-bottom:7px}
+.work-meta p{color:var(--soft);font-size:.9rem;line-height:1.55}
+.work-meta b{color:var(--ink)}
+
+.contact{background:var(--muted);padding:95px 0}
+.contact h2{font-size:clamp(2.3rem,5vw,4.2rem);margin-top:12px}
+.contact p{color:var(--soft);margin-top:16px;line-height:1.7;max-width:56ch}
+.contact-links{margin-top:34px;display:flex;flex-wrap:wrap;gap:14px}
+.btn{display:inline-block;border:1px solid var(--ink);padding:12px 22px;font-size:.9rem}
+.btn:hover{background:var(--ink);color:var(--bg)}
+footer{padding:34px 32px;text-align:center;color:var(--soft);font-size:.84rem;border-top:1px solid var(--line)}
+
+.nav-toggle{display:none}
+
+@media(max-width:900px){
+.hero{grid-template-columns:1fr;gap:34px}
+.clients-inner{grid-template-columns:1fr;gap:36px}
+.client-list{grid-template-columns:1fr}
+.work-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<header>
+  <div class="nav-inner">
+    <nav>
+      <ul id="navList">
+        <li><a href="#about">About</a></li>
+        <li><a href="#clients">Clients</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap hero" id="about">
+  <div class="hero-left">
+    <p class="eyebrow">About Me</p>
+    <h1>Kerem Sarıoğlu</h1>
+    <p class="hero-role">Art Director / Istanbul</p>
+    <div class="hero-line"></div>
+  </div>
+
+  <div class="hero-copy">
+    <p>İstanbul merkezli bir Art Director olarak, 2023 yılından bu yana Puck Global bünyesinde markalar için sosyal medya, reklam kampanyası, outdoor, dijital film, katalog, logo ve web banner tasarımları üretiyorum.</p>
+    <p>Starbucks, TatilBudur, Biscolata, Ozmo, Korkmaz, Isuzu, Pastavilla, Kemal Kükrer, Nissin, Ajinomoto, Lastikcim, Times Teknoloji, Katia & Bony, Anadolu Motor, Honda Marine ve Arbel gibi markalarla çalışma deneyimine sahibim.</p>
+    <p>Görsel hikaye anlatımı, marka kimliği ve yapay zeka destekli kreatif üretim süreçlerini bir araya getirerek; fikirden tasarıma, kampanya kurgusundan final görsele kadar bütünlüklü işler üretmeye odaklanıyorum.</p>
+
+    <div class="cv-lines">
+      <div><span>Title</span><strong>Art Director</strong></div>
+      <div><span>Experience</span><strong>Puck Global / 2023 — Present</strong></div>
+      <div><span>Education</span><strong>Grafik Tasarım — Gelişim Üniversitesi</strong></div>
+      <div><span>Focus</span><strong>360° kampanya, sosyal medya, outdoor, dijital reklam, AI destekli üretim</strong></div>
     </div>
-''','''
-  <section class="wrap hero" id="about">
-    <div class="hero-left">
-      <p class="eyebrow">About Me</p>
-      <h1>Kerem Sarıoğlu</h1>
-      <p class="hero-role">Art Director / Istanbul</p>
-      <div class="hero-line"></div>
-    </div>
-''')
 
-# Clients alanını komple değiştir
-old_clients = '''  <section class="clients" id="clients">
-    <div class="wrap section-title">
+    <a class="scroll-work" href="#work"><span>İşlerime git</span><b>↓</b></a>
+  </div>
+</section>
+
+<section class="clients" id="clients">
+  <div class="wrap clients-inner">
+    <div class="clients-head">
       <p class="eyebrow">Selected Clients</p>
-      <h2>Çalıştığım Markalar</h2>
+      <h2>Brands I’ve worked with</h2>
     </div>
 
+    <div class="client-list">
+      <div><span>01</span><strong>Starbucks</strong></div>
+      <div><span>02</span><strong>Ozmo</strong></div>
+      <div><span>03</span><strong>Biscolata</strong></div>
+      <div><span>04</span><strong>TatilBudur</strong></div>
+      <div><span>05</span><strong>Korkmaz</strong></div>
+      <div><span>06</span><strong>Isuzu</strong></div>
+      <div><span>07</span><strong>Pastavilla</strong></div>
+      <div><span>08</span><strong>Kemal Kükrer</strong></div>
+      <div><span>09</span><strong>Nissin</strong></div>
+      <div><span>10</span><strong>Ajinomoto</strong></div>
+      <div><span>11</span><strong>Honda Marine</strong></div>
+      <div><span>12</span><strong>Anadolu Motor</strong></div>
+      <div><span>13</span><strong>Lastikcim</strong></div>
+      <div><span>14</span><strong>Times Teknoloji</strong></div>
+      <div><span>15</span><strong>Katia & Bony</strong></div>
+      <div><span>16</span><strong>Arbel</strong></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap work-intro">
+    <p class="eyebrow">Selected Works</p>
+    <h2>İşlerim</h2>
+    <p>Çalışmaları önce üretim alanına göre kategorilendirmek, sonra her kategoride markaları göstermek daha güçlü bir portfolyo akışı oluşturur.</p>
+  </div>
+
+  <div class="filter-row">
     <div class="wrap">
-      <div class="client-grid">
-        <span>Starbucks</span>
-        <span>Ozmo</span>
-        <span>Biscolata</span>
-        <span>TatilBudur</span>
-        <span>Korkmaz</span>
-        <span>Isuzu</span>
-        <span>Pastavilla</span>
-        <span>Kemal Kükrer</span>
-        <span>Nissin</span>
-        <span>Ajinomoto</span>
-        <span>Honda Marine</span>
-        <span>Anadolu Motor</span>
-        <span>Lastikcim</span>
-        <span>Times Teknoloji</span>
-        <span>Katia & Bony</span>
-        <span>Arbel</span>
-      </div>
+      <button class="filter-link active" data-filter="all">Tümü</button>
+      <button class="filter-link" data-filter="social">Social Media</button>
+      <button class="filter-link" data-filter="campaign">Campaign</button>
+      <button class="filter-link" data-filter="outdoor">Outdoor</button>
+      <button class="filter-link" data-filter="branding">Branding</button>
+      <button class="filter-link" data-filter="web">Web / Banner</button>
     </div>
-  </section>'''
+  </div>
 
-new_clients = '''  <section class="clients" id="clients">
-    <div class="wrap clients-inner">
-      <div class="clients-head">
-        <p class="eyebrow">Selected Clients</p>
-        <h2>Brands I’ve worked with</h2>
-      </div>
+  <div class="wrap work-grid">
+    <a class="work-card" data-cat="social"><div class="work-media"><span class="tag-badge">Social Media</span><span class="ph">Ozmo — Görsel</span></div><div class="work-meta"><h3>Ozmo Social Media</h3><p><b>Ozmo</b> için sosyal medya post tasarımları ve kampanya görselleri.</p></div></a>
+    <a class="work-card" data-cat="campaign"><div class="work-media"><span class="tag-badge">Campaign</span><span class="ph">TatilBudur — Kampanya</span></div><div class="work-meta"><h3>360° Kampanya Tasarımları</h3><p><b>TatilBudur</b> için kampanya görsel dili.</p></div></a>
+    <a class="work-card" data-cat="social"><div class="work-media"><span class="tag-badge">Social Media</span><span class="ph">Starbucks — İçerik</span></div><div class="work-meta"><h3>Marka İçerik Tasarımları</h3><p><b>Starbucks</b> için sosyal medya ve dijital iletişim çalışmaları.</p></div></a>
+    <a class="work-card" data-cat="outdoor"><div class="work-media"><span class="tag-badge">Outdoor</span><span class="ph">Isuzu — Outdoor</span></div><div class="work-meta"><h3>Outdoor Tasarımları</h3><p><b>Isuzu</b> için açık hava reklam tasarımları.</p></div></a>
+  </div>
+</section>
 
-      <div class="client-list">
-        <div><span>01</span><strong>Starbucks</strong></div>
-        <div><span>02</span><strong>Ozmo</strong></div>
-        <div><span>03</span><strong>Biscolata</strong></div>
-        <div><span>04</span><strong>TatilBudur</strong></div>
-        <div><span>05</span><strong>Korkmaz</strong></div>
-        <div><span>06</span><strong>Isuzu</strong></div>
-        <div><span>07</span><strong>Pastavilla</strong></div>
-        <div><span>08</span><strong>Kemal Kükrer</strong></div>
-        <div><span>09</span><strong>Nissin</strong></div>
-        <div><span>10</span><strong>Ajinomoto</strong></div>
-        <div><span>11</span><strong>Honda Marine</strong></div>
-        <div><span>12</span><strong>Anadolu Motor</strong></div>
-        <div><span>13</span><strong>Lastikcim</strong></div>
-        <div><span>14</span><strong>Times Teknoloji</strong></div>
-        <div><span>15</span><strong>Katia & Bony</strong></div>
-        <div><span>16</span><strong>Arbel</strong></div>
-      </div>
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h2>Yeni projeler için iletişime geçelim.</h2>
+    <p>Portfolyo, freelance işler, iş birlikleri veya kreatif projeler için bana mail ya da Behance üzerinden ulaşabilirsin.</p>
+    <div class="contact-links">
+      <a class="btn" href="mailto:mitsabtw@gmail.com">mitsabtw@gmail.com</a>
+      <a class="btn" href="https://behance.net/keremsarolu" target="_blank">Behance</a>
     </div>
-  </section>'''
+  </div>
+</section>
 
-html = html.replace(old_clients, new_clients)
+</main>
 
-# Eski client css'i premium listeye çevir
-html = html.replace('''
-  .clients{
-    padding-bottom:90px;
-    border-bottom:1px solid var(--line);
-  }
+<footer>© 2026 Kerem Sarıoğlu — Art Director</footer>
 
-  .client-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);
-    border-left:1px solid var(--line);
-  }
+<script>
+const filterBtns=document.querySelectorAll('.filter-link');
+const workCards=document.querySelectorAll('.work-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    workCards.forEach(card=>{
+      card.style.display=(f==='all'||card.dataset.cat===f)?'block':'none';
+    });
+  });
+});
+</script>
 
-  .client-grid span{
-    padding:24px;
-    border-right:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    color:var(--ink);
-    font-size:.96rem;
-  }
-''','''
-  .clients{
-    border-bottom:1px solid var(--line);
-  }
+</body>
+</html>
+HTMLEOF
 
-  .clients-inner{
-    padding-top:100px;
-    padding-bottom:100px;
-    display:grid;
-    grid-template-columns:.8fr 1.2fr;
-    gap:80px;
-  }
-
-  .clients-head{
-    position:sticky;
-    top:120px;
-    align-self:start;
-  }
-
-  .clients-head h2{
-    font-size:clamp(2.2rem,4vw,4rem);
-    line-height:1;
-    margin-top:14px;
-    max-width:9ch;
-  }
-
-  .client-list{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    column-gap:44px;
-    border-top:1px solid var(--line);
-  }
-
-  .client-list div{
-    display:grid;
-    grid-template-columns:46px 1fr;
-    gap:18px;
-    align-items:baseline;
-    padding:18px 0;
-    border-bottom:1px solid var(--line);
-  }
-
-  .client-list span{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.68rem;
-    color:var(--ink-soft);
-  }
-
-  .client-list strong{
-    font-family:'Fraunces',serif;
-    font-size:clamp(1.35rem,2.1vw,2rem);
-    font-weight:500;
-    letter-spacing:-.02em;
-  }
-''')
-
-# responsive client-grid referanslarını düzelt
-html = html.replace('''
-    .client-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
-''','''
-    .clients-inner{
-      grid-template-columns:1fr;
-      gap:36px;
-    }
-
-    .clients-head{
-      position:static;
-    }
-
-    .clients-head h2{
-      max-width:none;
-    }
-''')
-
-html = html.replace('''
-    .client-grid{
-      grid-template-columns:1fr;
-    }
-''','''
-    .client-list{
-      grid-template-columns:1fr;
-    }
-
-    .hero{
-      align-items:start;
-      padding-top:80px;
-    }
-
-    .hero-left{
-      position:static;
-    }
-''')
-
-p.write_text(html)
-Path("/mnt/user-data/outputs/index.html").write_text(html)
-print("done")
-PY
+cp /home/claude/portfolio/index.html /mnt/user-data/outputs/index.html
+echo done
