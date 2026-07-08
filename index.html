@@ -1,112 +1,11 @@
-cat > /home/claude/portfolio/index.html << 'HTMLEOF'
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kerem Sarıoğlu — Art Director</title>
+python3 - <<'PY'
+from pathlib import Path
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+p = Path("/home/claude/portfolio/index.html")
+html = p.read_text()
 
-<style>
-  :root{
-    --bg:#FFFFFF;
-    --ink:#141414;
-    --ink-soft:#737373;
-    --line:#E6E6E6;
-    --muted:#F6F4EF;
-  }
-
-  *{ box-sizing:border-box; margin:0; padding:0; }
-  html{ scroll-behavior:smooth; }
-  body{
-    background:var(--bg);
-    color:var(--ink);
-    font-family:'Inter',sans-serif;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  a{ color:inherit; text-decoration:none; }
-  :focus-visible{ outline:2px solid var(--ink); outline-offset:3px; }
-
-  .wrap{
-    max-width:1240px;
-    margin:0 auto;
-    padding:0 32px;
-  }
-
-  .eyebrow{
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.72rem;
-    letter-spacing:.1em;
-    text-transform:uppercase;
-    color:var(--ink-soft);
-  }
-
-  h1,h2,h3{
-    font-family:'Fraunces',serif;
-    font-weight:600;
-    letter-spacing:-.02em;
-  }
-
-  header{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    z-index:100;
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(8px);
-    border-bottom:1px solid var(--line);
-  }
-
-  .nav-inner{
-    max-width:1240px;
-    margin:0 auto;
-    padding:22px 32px;
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-  }
-
-  nav ul{
-    list-style:none;
-    display:flex;
-    gap:34px;
-  }
-
-  nav a{
-    font-size:.92rem;
-    color:var(--ink-soft);
-    border-bottom:1px solid transparent;
-    padding-bottom:3px;
-    transition:color .15s,border-color .15s;
-  }
-
-  nav a:hover,
-  nav a.active{
-    color:var(--ink);
-    border-color:var(--ink);
-  }
-
-  .nav-toggle{
-    display:none;
-    background:none;
-    border:none;
-    font-size:1.4rem;
-    color:var(--ink);
-    cursor:pointer;
-  }
-
-  main{
-    padding-top:66px;
-  }
-
-  section{
-    scroll-margin-top:90px;
-  }
-
+# HERO CSS'i değiştir
+html = html.replace('''
   .hero{
     min-height:calc(100vh - 66px);
     display:grid;
@@ -124,396 +23,66 @@ cat > /home/claude/portfolio/index.html << 'HTMLEOF'
     margin-top:16px;
     max-width:9ch;
   }
-
-  .hero-copy{
-    max-width:650px;
-  }
-
-  .hero-copy p{
-    color:var(--ink-soft);
-    font-size:1.03rem;
-    line-height:1.75;
-    margin-bottom:15px;
-  }
-
-  .cv-lines{
-    margin-top:34px;
-    border-top:1px solid var(--line);
-  }
-
-  .cv-lines div{
+''','''
+  .hero{
+    min-height:calc(100vh - 66px);
     display:grid;
-    grid-template-columns:145px 1fr;
-    gap:22px;
-    padding:15px 0;
+    grid-template-columns:minmax(280px,.9fr) minmax(420px,1.1fr);
+    gap:96px;
+    align-items:end;
+    padding-top:120px;
+    padding-bottom:72px;
     border-bottom:1px solid var(--line);
   }
 
-  .cv-lines span{
+  .hero-left{
+    position:sticky;
+    bottom:72px;
+  }
+
+  .hero h1{
+    font-size:clamp(3.8rem,8vw,8.2rem);
+    line-height:.82;
+    margin-top:18px;
+    max-width:8ch;
+  }
+
+  .hero-role{
+    margin-top:24px;
     font-family:'IBM Plex Mono',monospace;
-    font-size:.7rem;
+    font-size:.75rem;
     letter-spacing:.08em;
     text-transform:uppercase;
     color:var(--ink-soft);
   }
 
-  .cv-lines strong{
-    font-weight:500;
-    line-height:1.45;
-  }
-
-  .scroll-work{
-    margin-top:42px;
-    display:inline-flex;
-    align-items:center;
-    gap:14px;
-    width:max-content;
-  }
-
-  .scroll-work span{
-    font-size:.9rem;
-    color:var(--ink-soft);
-  }
-
-  .scroll-work b{
-    width:46px;
-    height:46px;
-    border:1px solid var(--ink);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:1.3rem;
-    font-weight:400;
-    transition:transform .2s,background .2s,color .2s;
-  }
-
-  .scroll-work:hover b{
-    transform:translateY(5px);
+  .hero-line{
+    width:76px;
+    height:1px;
     background:var(--ink);
-    color:var(--bg);
+    margin-top:28px;
   }
+''')
 
-  .section-title{
-    padding:90px 0 30px;
-  }
-
-  .section-title h2{
-    font-size:clamp(2.2rem,5vw,4.2rem);
-    margin-top:12px;
-  }
-
-  .clients{
-    padding-bottom:90px;
-    border-bottom:1px solid var(--line);
-  }
-
-  .client-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    border-top:1px solid var(--line);
-    border-left:1px solid var(--line);
-  }
-
-  .client-grid span{
-    padding:24px;
-    border-right:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    color:var(--ink);
-    font-size:.96rem;
-  }
-
-  .work-intro{
-    padding:90px 0 30px;
-  }
-
-  .work-intro h2{
-    font-size:clamp(2.4rem,5vw,4.4rem);
-    margin-top:12px;
-  }
-
-  .work-intro p{
-    color:var(--ink-soft);
-    margin-top:16px;
-    max-width:58ch;
-    line-height:1.7;
-  }
-
-  .filter-row{
-    position:sticky;
-    top:66px;
-    z-index:20;
-    background:var(--bg);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid var(--line);
-    padding:18px 0;
-  }
-
-  .filter-row .wrap{
-    display:flex;
-    gap:26px;
-    overflow-x:auto;
-  }
-
-  .filter-link{
-    white-space:nowrap;
-    font-size:.92rem;
-    color:var(--ink-soft);
-    padding-bottom:4px;
-    border:none;
-    border-bottom:2px solid transparent;
-    cursor:pointer;
-    background:none;
-    font-family:'Inter',sans-serif;
-  }
-
-  .filter-link:hover,
-  .filter-link.active{
-    color:var(--ink);
-    border-bottom-color:var(--ink);
-  }
-
-  .work-grid{
-    padding:54px 0 110px;
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:58px 32px;
-  }
-
-  .work-card{
-    display:block;
-  }
-
-  .work-media{
-    aspect-ratio:16/10;
-    background:linear-gradient(150deg,#F3F1EC,#E7E4DB);
-    overflow:hidden;
-    position:relative;
-  }
-
-  .work-media::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:rgba(20,20,20,.02);
-  }
-
-  .tag-badge{
-    position:absolute;
-    top:14px;
-    left:14px;
-    z-index:2;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.68rem;
-    text-transform:uppercase;
-    letter-spacing:.05em;
-    background:#fff;
-    padding:5px 10px;
-    color:var(--ink-soft);
-  }
-
-  .ph{
-    position:absolute;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-family:'IBM Plex Mono',monospace;
-    font-size:.72rem;
-    color:var(--ink-soft);
-    transition:transform .35s;
-  }
-
-  .work-card:hover .ph{
-    transform:scale(1.04);
-  }
-
-  .work-meta{
-    padding-top:16px;
-  }
-
-  .work-meta h3{
-    font-size:1.35rem;
-    margin-bottom:7px;
-  }
-
-  .work-meta p{
-    color:var(--ink-soft);
-    font-size:.9rem;
-    line-height:1.55;
-  }
-
-  .work-meta b{
-    color:var(--ink);
-    font-weight:600;
-  }
-
-  .contact{
-    background:var(--muted);
-    padding:95px 0;
-  }
-
-  .contact h2{
-    font-size:clamp(2.3rem,5vw,4.2rem);
-    margin-top:12px;
-  }
-
-  .contact p{
-    color:var(--ink-soft);
-    margin-top:16px;
-    line-height:1.7;
-    max-width:56ch;
-  }
-
-  .contact-links{
-    margin-top:34px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-  }
-
-  .btn{
-    display:inline-block;
-    border:1px solid var(--ink);
-    padding:12px 22px;
-    font-size:.9rem;
-    transition:background .15s,color .15s;
-  }
-
-  .btn:hover{
-    background:var(--ink);
-    color:var(--bg);
-  }
-
-  footer{
-    padding:34px 32px;
-    text-align:center;
-    color:var(--ink-soft);
-    font-size:.84rem;
-    border-top:1px solid var(--line);
-  }
-
-  @media (max-width:900px){
-    .hero{
-      grid-template-columns:1fr;
-      gap:34px;
-    }
-
-    .hero h1{
-      max-width:none;
-    }
-
-    .client-grid{
-      grid-template-columns:repeat(2,1fr);
-    }
-
-    .work-grid{
-      grid-template-columns:1fr;
-    }
-  }
-
-  @media (max-width:700px){
-    .nav-inner{
-      justify-content:flex-end;
-    }
-
-    .nav-toggle{
-      display:block;
-    }
-
-    nav ul{
-      position:absolute;
-      top:100%;
-      left:0;
-      right:0;
-      flex-direction:column;
-      gap:0;
-      background:var(--bg);
-      border-bottom:1px solid var(--line);
-      max-height:0;
-      overflow:hidden;
-    }
-
-    nav ul.open{
-      max-height:360px;
-    }
-
-    nav a{
-      display:block;
-      padding:16px 32px;
-      border-bottom:1px solid var(--line);
-    }
-
-    .cv-lines div{
-      grid-template-columns:1fr;
-      gap:6px;
-    }
-
-    .client-grid{
-      grid-template-columns:1fr;
-    }
-  }
-</style>
-</head>
-
-<body>
-
-<header>
-  <div class="nav-inner">
-    <button class="nav-toggle" id="navToggle" aria-label="Menüyü aç">☰</button>
-    <nav>
-      <ul id="navList">
-        <li><a href="#about">About</a></li>
-        <li><a href="#clients">Clients</a></li>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main>
-
+# hero HTML sol tarafı classla
+html = html.replace('''
   <section class="wrap hero" id="about">
     <div>
       <p class="eyebrow">About Me</p>
       <h1>Kerem Sarıoğlu</h1>
     </div>
-
-    <div class="hero-copy">
-      <p>İstanbul merkezli bir Art Director olarak, 2023 yılından bu yana Puck Global bünyesinde markalar için sosyal medya, reklam kampanyası, outdoor, dijital film, katalog, logo ve web banner tasarımları üretiyorum.</p>
-
-      <p>Starbucks, TatilBudur, Biscolata, Ozmo, Korkmaz, Isuzu, Pastavilla, Kemal Kükrer, Nissin, Ajinomoto, Lastikcim, Times Teknoloji, Katia & Bony, Anadolu Motor, Honda Marine ve Arbel gibi markalarla çalışma deneyimine sahibim.</p>
-
-      <p>Görsel hikaye anlatımı, marka kimliği ve yapay zeka destekli kreatif üretim süreçlerini bir araya getirerek; fikirden tasarıma, kampanya kurgusundan final görsele kadar bütünlüklü işler üretmeye odaklanıyorum.</p>
-
-      <div class="cv-lines">
-        <div>
-          <span>Title</span>
-          <strong>Art Director</strong>
-        </div>
-        <div>
-          <span>Experience</span>
-          <strong>Puck Global / 2023 — Present</strong>
-        </div>
-        <div>
-          <span>Education</span>
-          <strong>Grafik Tasarım — Gelişim Üniversitesi</strong>
-        </div>
-        <div>
-          <span>Focus</span>
-          <strong>360° kampanya, sosyal medya, outdoor, dijital reklam, AI destekli üretim</strong>
-        </div>
-      </div>
-
-      <a class="scroll-work" href="#work" aria-label="İşlerime git">
-        <span>İşlerime git</span>
-        <b>↓</b>
-      </a>
+''','''
+  <section class="wrap hero" id="about">
+    <div class="hero-left">
+      <p class="eyebrow">About Me</p>
+      <h1>Kerem Sarıoğlu</h1>
+      <p class="hero-role">Art Director / Istanbul</p>
+      <div class="hero-line"></div>
     </div>
-  </section>
+''')
 
-  <section class="clients" id="clients">
+# Clients alanını komple değiştir
+old_clients = '''  <section class="clients" id="clients">
     <div class="wrap section-title">
       <p class="eyebrow">Selected Clients</p>
       <h2>Çalıştığım Markalar</h2>
@@ -539,171 +108,155 @@ cat > /home/claude/portfolio/index.html << 'HTMLEOF'
         <span>Arbel</span>
       </div>
     </div>
-  </section>
+  </section>'''
 
-  <section id="work">
-    <div class="wrap work-intro">
-      <p class="eyebrow">Selected Works</p>
-      <h2>İşlerim</h2>
-      <p>Çalışmaları marka marka değil, önce üretim alanına göre kategorilendirmek daha doğru. Böylece ziyaretçi önce ne yaptığını anlar; sonra her kategoride çalıştığın markaları görür.</p>
-    </div>
+new_clients = '''  <section class="clients" id="clients">
+    <div class="wrap clients-inner">
+      <div class="clients-head">
+        <p class="eyebrow">Selected Clients</p>
+        <h2>Brands I’ve worked with</h2>
+      </div>
 
-    <div class="filter-row">
-      <div class="wrap">
-        <button class="filter-link active" data-filter="all">Tümü</button>
-        <button class="filter-link" data-filter="social">Social Media</button>
-        <button class="filter-link" data-filter="campaign">Campaign</button>
-        <button class="filter-link" data-filter="outdoor">Outdoor</button>
-        <button class="filter-link" data-filter="branding">Branding</button>
-        <button class="filter-link" data-filter="web">Web / Banner</button>
+      <div class="client-list">
+        <div><span>01</span><strong>Starbucks</strong></div>
+        <div><span>02</span><strong>Ozmo</strong></div>
+        <div><span>03</span><strong>Biscolata</strong></div>
+        <div><span>04</span><strong>TatilBudur</strong></div>
+        <div><span>05</span><strong>Korkmaz</strong></div>
+        <div><span>06</span><strong>Isuzu</strong></div>
+        <div><span>07</span><strong>Pastavilla</strong></div>
+        <div><span>08</span><strong>Kemal Kükrer</strong></div>
+        <div><span>09</span><strong>Nissin</strong></div>
+        <div><span>10</span><strong>Ajinomoto</strong></div>
+        <div><span>11</span><strong>Honda Marine</strong></div>
+        <div><span>12</span><strong>Anadolu Motor</strong></div>
+        <div><span>13</span><strong>Lastikcim</strong></div>
+        <div><span>14</span><strong>Times Teknoloji</strong></div>
+        <div><span>15</span><strong>Katia & Bony</strong></div>
+        <div><span>16</span><strong>Arbel</strong></div>
       </div>
     </div>
+  </section>'''
 
-    <div class="wrap work-grid">
+html = html.replace(old_clients, new_clients)
 
-      <a class="work-card" data-cat="social">
-        <div class="work-media">
-          <span class="tag-badge">Social Media</span>
-          <span class="ph">Ozmo — Görsel</span>
-        </div>
-        <div class="work-meta">
-          <h3>Ozmo Social Media</h3>
-          <p><b>Ozmo</b> için sosyal medya post tasarımları ve kampanya görselleri.</p>
-        </div>
-      </a>
+# Eski client css'i premium listeye çevir
+html = html.replace('''
+  .clients{
+    padding-bottom:90px;
+    border-bottom:1px solid var(--line);
+  }
 
-      <a class="work-card" data-cat="campaign">
-        <div class="work-media">
-          <span class="tag-badge">Campaign</span>
-          <span class="ph">TatilBudur — Kampanya</span>
-        </div>
-        <div class="work-meta">
-          <h3>360° Kampanya Tasarımları</h3>
-          <p><b>TatilBudur</b> için dijital ve geleneksel mecralara uyarlanabilir kampanya görsel dili.</p>
-        </div>
-      </a>
+  .client-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    border-top:1px solid var(--line);
+    border-left:1px solid var(--line);
+  }
 
-      <a class="work-card" data-cat="social">
-        <div class="work-media">
-          <span class="tag-badge">Social Media</span>
-          <span class="ph">Starbucks — İçerik</span>
-        </div>
-        <div class="work-meta">
-          <h3>Marka İçerik Tasarımları</h3>
-          <p><b>Starbucks</b> için sosyal medya ve dijital iletişim odaklı görsel çalışmalar.</p>
-        </div>
-      </a>
+  .client-grid span{
+    padding:24px;
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    color:var(--ink);
+    font-size:.96rem;
+  }
+''','''
+  .clients{
+    border-bottom:1px solid var(--line);
+  }
 
-      <a class="work-card" data-cat="outdoor">
-        <div class="work-media">
-          <span class="tag-badge">Outdoor</span>
-          <span class="ph">Isuzu — Outdoor</span>
-        </div>
-        <div class="work-meta">
-          <h3>Outdoor Tasarımları</h3>
-          <p><b>Isuzu</b> için açık hava mecralarına yönelik kampanya ve reklam tasarımları.</p>
-        </div>
-      </a>
+  .clients-inner{
+    padding-top:100px;
+    padding-bottom:100px;
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:80px;
+  }
 
-      <a class="work-card" data-cat="campaign">
-        <div class="work-media">
-          <span class="tag-badge">Campaign</span>
-          <span class="ph">Biscolata — Kampanya</span>
-        </div>
-        <div class="work-meta">
-          <h3>Dijital Kampanya Görselleri</h3>
-          <p><b>Biscolata</b> için kampanya fikri ve görsel tasarım üretimleri.</p>
-        </div>
-      </a>
+  .clients-head{
+    position:sticky;
+    top:120px;
+    align-self:start;
+  }
 
-      <a class="work-card" data-cat="branding">
-        <div class="work-media">
-          <span class="tag-badge">Branding</span>
-          <span class="ph">Logo / Kimlik</span>
-        </div>
-        <div class="work-meta">
-          <h3>Logo & Marka Kimliği</h3>
-          <p>Çeşitli markalar için logo, görsel kimlik ve marka uygulama tasarımları.</p>
-        </div>
-      </a>
+  .clients-head h2{
+    font-size:clamp(2.2rem,4vw,4rem);
+    line-height:1;
+    margin-top:14px;
+    max-width:9ch;
+  }
 
-      <a class="work-card" data-cat="web">
-        <div class="work-media">
-          <span class="tag-badge">Web / Banner</span>
-          <span class="ph">Web Banner</span>
-        </div>
-        <div class="work-meta">
-          <h3>Web Banner Tasarımları</h3>
-          <p>Markaların web sitesi ve dijital medya kullanımları için banner tasarımları.</p>
-        </div>
-      </a>
+  .client-list{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:44px;
+    border-top:1px solid var(--line);
+  }
 
-      <a class="work-card" data-cat="social">
-        <div class="work-media">
-          <span class="tag-badge">Social Media</span>
-          <span class="ph">Korkmaz — İçerik</span>
-        </div>
-        <div class="work-meta">
-          <h3>Kurumsal Sosyal Medya</h3>
-          <p><b>Korkmaz</b> için sosyal medya post ve kampanya destek görselleri.</p>
-        </div>
-      </a>
+  .client-list div{
+    display:grid;
+    grid-template-columns:46px 1fr;
+    gap:18px;
+    align-items:baseline;
+    padding:18px 0;
+    border-bottom:1px solid var(--line);
+  }
 
-    </div>
-  </section>
+  .client-list span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.68rem;
+    color:var(--ink-soft);
+  }
 
-  <section class="contact" id="contact">
-    <div class="wrap">
-      <p class="eyebrow">Contact</p>
-      <h2>Yeni projeler için iletişime geçelim.</h2>
-      <p>Portfolyo, freelance işler, iş birlikleri veya kreatif projeler için bana mail ya da Behance üzerinden ulaşabilirsin.</p>
+  .client-list strong{
+    font-family:'Fraunces',serif;
+    font-size:clamp(1.35rem,2.1vw,2rem);
+    font-weight:500;
+    letter-spacing:-.02em;
+  }
+''')
 
-      <div class="contact-links">
-        <a class="btn" href="mailto:mitsabtw@gmail.com">mitsabtw@gmail.com</a>
-        <a class="btn" href="https://behance.net/keremsarolu" target="_blank" rel="noopener">Behance</a>
-      </div>
-    </div>
-  </section>
+# responsive client-grid referanslarını düzelt
+html = html.replace('''
+    .client-grid{
+      grid-template-columns:repeat(2,1fr);
+    }
+''','''
+    .clients-inner{
+      grid-template-columns:1fr;
+      gap:36px;
+    }
 
-</main>
+    .clients-head{
+      position:static;
+    }
 
-<footer>© 2026 Kerem Sarıoğlu — Art Director</footer>
+    .clients-head h2{
+      max-width:none;
+    }
+''')
 
-<script>
-  const navToggle = document.getElementById('navToggle');
-  const navList = document.getElementById('navList');
-  const navLinks = document.querySelectorAll('nav a');
+html = html.replace('''
+    .client-grid{
+      grid-template-columns:1fr;
+    }
+''','''
+    .client-list{
+      grid-template-columns:1fr;
+    }
 
-  navToggle.addEventListener('click', () => {
-    navList.classList.toggle('open');
-  });
+    .hero{
+      align-items:start;
+      padding-top:80px;
+    }
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navList.classList.remove('open');
-    });
-  });
+    .hero-left{
+      position:static;
+    }
+''')
 
-  const filterBtns = document.querySelectorAll('.filter-link');
-  const workCards = document.querySelectorAll('.work-card');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.dataset.filter;
-
-      workCards.forEach(card => {
-        card.style.display = filter === 'all' || card.dataset.cat === filter ? 'block' : 'none';
-      });
-    });
-  });
-</script>
-
-</body>
-</html>
-HTMLEOF
-
-cp /home/claude/portfolio/index.html /mnt/user-data/outputs/index.html
-echo done
+p.write_text(html)
+Path("/mnt/user-data/outputs/index.html").write_text(html)
+print("done")
+PY
