@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerem Sarıoğlu — Art Director</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#fff;
+  --ink:#141414;
+  --soft:#707070;
+  --line:#e6e6e6;
+  --muted:#f6f4ef;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 32px}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+h1,h2,h3{
+  font-family:Fraunces,serif;
+  font-weight:600;
+  letter-spacing:-.02em;
+}
+
+/* NAV */
+header{
+  position:fixed;
+  top:18px;
+  left:0;
+  right:0;
+  z-index:100;
+  pointer-events:none;
+}
+.nav-inner{
+  max-width:1240px;
+  margin:0 auto;
+  padding:0 32px;
+  display:flex;
+  justify-content:center;
+}
+nav{
+  pointer-events:auto;
+  background:rgba(255,255,255,.84);
+  border:1px solid rgba(20,20,20,.14);
+  box-shadow:0 18px 45px rgba(20,20,20,.08);
+  backdrop-filter:blur(14px);
+  border-radius:999px;
+  padding:7px;
+}
+nav ul{
+  list-style:none;
+  display:flex;
+  justify-content:center;
+  gap:4px;
+}
+nav a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:104px;
+  padding:11px 18px;
+  border-radius:999px;
+  font-size:.94rem;
+  font-weight:600;
+  color:var(--ink);
+  transition:background .22s ease,transform .22s ease,color .22s ease;
+}
+nav a:hover{
+  background:var(--ink);
+  color:var(--bg);
+  transform:translateY(-1px);
+}
+
+main{padding-top:0}
+section{scroll-margin-top:100px}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:.9fr 1.1fr;
+  gap:84px;
+  align-items:center;
+  padding-top:88px;
+  padding-bottom:56px;
+}
+.hero h1{
+  font-size:clamp(4rem,8vw,8.2rem);
+  line-height:.82;
+  margin-top:8px;
+  max-width:8ch;
+}
+.hero-role{
+  margin-top:24px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.75rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+.hero-line{
+  width:76px;
+  height:1px;
+  background:var(--ink);
+  margin-top:28px;
+}
+.hero-copy p{
+  color:var(--soft);
+  font-size:1.03rem;
+  line-height:1.75;
+  margin-bottom:15px;
+}
+.cv-lines{
+  margin-top:34px;
+  border-top:1px solid var(--line);
+}
+.cv-lines div{
+  display:grid;
+  grid-template-columns:145px 1fr;
+  gap:22px;
+  padding:15px 0;
+  border-bottom:1px solid var(--line);
+}
+.cv-lines span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+.cv-lines strong{
+  font-weight:500;
+  line-height:1.45;
+}
+.scroll-work{
+  margin:46px auto 0;
+  width:max-content;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  border:1px solid var(--ink);
+  border-radius:999px;
+  padding:10px 12px 10px 22px;
+  font-weight:600;
+  box-shadow:0 16px 40px rgba(20,20,20,.08);
+  transition:transform .22s ease,background .22s ease,color .22s ease;
+}
+.scroll-work span{
+  font-size:1rem;
+  color:inherit;
+}
+.scroll-work b{
+  width:42px;
+  height:42px;
+  background:var(--ink);
+  color:var(--bg);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.25rem;
+  font-weight:400;
+  transition:.22s;
+}
+.scroll-work:hover{
+  transform:translateY(-2px);
+  background:var(--ink);
+  color:var(--bg);
+}
+.scroll-work:hover b{
+  transform:translateY(4px);
+  background:var(--bg);
+  color:var(--ink);
+}
+
+/* PROJECTS */
+.projects{
+  padding:70px 0 120px;
+}
+.projects-title{
+  display:flex;
+  justify-content:center;
+  margin-bottom:54px;
+}
+.projects-title h2{
+  font-size:clamp(2.7rem,6vw,5.6rem);
+  line-height:.9;
+}
+
+.project{
+  border-top:1px solid var(--line);
+  padding:48px 0 70px;
+}
+.project-head{
+  display:grid;
+  grid-template-columns:.7fr 1.3fr;
+  gap:60px;
+  margin-bottom:26px;
+}
+.project-kicker{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.7rem;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+.project h3{
+  font-size:clamp(2.4rem,5vw,4.8rem);
+  line-height:.92;
+}
+.project-info{
+  color:var(--soft);
+  line-height:1.7;
+  max-width:58ch;
+}
+.project-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:6px;
+}
+.project-tags button{
+  appearance:none;
+  border:1px solid rgba(20,20,20,.18);
+  background:#fff;
+  color:var(--ink);
+  border-radius:999px;
+  padding:13px 18px;
+  font:600 .92rem/1 Inter,sans-serif;
+  cursor:pointer;
+  box-shadow:0 12px 26px rgba(20,20,20,.05);
+  transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease;
+}
+.project-tags button:hover,
+.project-tags button.active{
+  transform:translateY(-2px);
+  background:var(--ink);
+  color:var(--bg);
+  border-color:var(--ink);
+}
+.project-grid{display:block}
+.visual{
+  min-height:320px;
+  background:linear-gradient(150deg,#f3f1ec,#e7e4db);
+  position:relative;
+  overflow:hidden;
+}
+.visual.large{
+  min-height:520px;
+}
+.visual::after{
+  content:attr(data-label);
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:var(--soft);
+  transition:transform .35s ease;
+}
+.visual::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(20,20,20,.025);
+}
+.visual:hover::after{transform:scale(1.05)}
+
+
+.work-panels{
+  margin-top:18px;
+}
+.work-panel{
+  display:none;
+  border:1px solid var(--line);
+  background:#fbfaf7;
+  padding:28px;
+}
+.work-panel.active{
+  display:block;
+}
+.work-panel-head{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-end;
+  margin-bottom:22px;
+}
+.work-panel h4{
+  font-family:Fraunces,serif;
+  font-size:clamp(1.8rem,3vw,3rem);
+  font-weight:600;
+  letter-spacing:-.02em;
+}
+.work-panel p{
+  color:var(--soft);
+  line-height:1.6;
+  max-width:48ch;
+}
+.work-gallery{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.work-slot{
+  min-height:220px;
+  border:1px dashed rgba(20,20,20,.22);
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--soft);
+  font-size:.9rem;
+}
+.work-slot.tall{
+  min-height:320px;
+  grid-row:span 2;
+}
+
+/* CONTACT */
+.contact{
+  background:var(--muted);
+  padding:95px 0;
+}
+.contact h2{
+  font-size:clamp(2.3rem,5vw,4.2rem);
+  margin-top:12px;
+}
+.contact p{
+  color:var(--soft);
+  margin-top:16px;
+  line-height:1.7;
+  max-width:56ch;
+}
+.contact-links{
+  margin-top:34px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:14px;
+}
+.btn{
+  display:inline-block;
+  border:1px solid var(--ink);
+  padding:12px 22px;
+  font-size:.9rem;
+  transition:.18s;
+}
+.btn:hover{
+  background:var(--ink);
+  color:var(--bg);
+}
+footer{
+  padding:34px 32px;
+  text-align:center;
+  color:var(--soft);
+  font-size:.84rem;
+  border-top:1px solid var(--line);
+}
+
+@media(max-width:900px){
+  nav ul{gap:4px}
+  nav a{font-size:.9rem;min-width:auto;padding:10px 14px}
+  .work-gallery{grid-template-columns:1fr 1fr}
+  .hero{
+    grid-template-columns:1fr;
+    gap:34px;
+    padding-top:96px;
+    align-items:start;
+  }
+  .project-head{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+  .visual.large,.visual{min-height:300px}
+}
+
+@media(max-width:560px){
+  .wrap{padding:0 22px}
+  .nav-inner{padding:20px 22px}
+  nav ul{gap:2px}
+  nav a{font-size:.82rem;padding:9px 11px}
+  .work-gallery{grid-template-columns:1fr}
+  .work-panel{padding:22px}
+  .work-panel-head{display:block}
+  .hero h1{font-size:clamp(3.5rem,18vw,5rem)}
+  .cv-lines div{
+    grid-template-columns:1fr;
+    gap:6px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav-inner">
+    <nav>
+      <ul>
+        <li><a href="#about">Hakkımda</a></li>
+        <li><a href="#projects">İşlerim</a></li>
+        <li><a href="#contact">İletişim</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="wrap hero" id="about">
+  <div class="hero-left">
+    <p class="eyebrow">Hakkımda</p>
+    <h1>Kerem Sarıoğlu</h1>
+    <p class="hero-role">Art Director / Istanbul</p>
+    <div class="hero-line"></div>
+  </div>
+
+  <div class="hero-copy">
+    <p>İstanbul merkezli bir Art Director olarak, 2023 yılından bu yana Puck Global bünyesinde markalar için sosyal medya, reklam kampanyası, outdoor, dijital film, katalog, logo ve web banner tasarımları üretiyorum.</p>
+    <p>Starbucks, TatilBudur, Biscolata, Ozmo, Korkmaz, Isuzu, Pastavilla, Kemal Kükrer, Nissin, Ajinomoto, Lastikcim, Times Teknoloji, Katia & Bony, Anadolu Motor, Honda Marine ve Arbel gibi markalarla çalışma deneyimine sahibim.</p>
+    <p>Görsel hikaye anlatımı, marka kimliği ve yapay zeka destekli kreatif üretim süreçlerini bir araya getirerek; fikirden tasarıma, kampanya kurgusundan final görsele kadar bütünlüklü işler üretmeye odaklanıyorum.</p>
+
+    <div class="cv-lines">
+      <div><span>Title</span><strong>Art Director</strong></div>
+      <div><span>Experience</span><strong>Puck Global / 2023 — Present</strong></div>
+      <div><span>Education</span><strong>Grafik Tasarım — Gelişim Üniversitesi</strong></div>
+      <div><span>Focus</span><strong>360° kampanya, sosyal medya, outdoor, dijital reklam, AI destekli üretim</strong></div>
+    </div>
+
+    <a class="scroll-work" href="#projects"><span>İşlerime git</span><b>↓</b></a>
+  </div>
+</section>
+
+<section class="projects" id="projects">
+  <div class="wrap projects-title">
+    <h2>İşlerim</h2>
+  </div>
+
+  <div class="wrap">
+
+    <article class="project" id="ozmo">
+      <div class="project-head">
+        <div>
+          <p class="project-kicker">01</p>
+          <h3>Ozmo</h3>
+        </div>
+        <div class="project-info">
+          <div class="project-tags" aria-label="Proje kategorileri">
+            <button type="button" data-panel="ozmo-branding">Branding</button>
+            <button type="button" data-panel="ozmo-social">Social media</button>
+            <button type="button" data-panel="ozmo-advertising">Advertising</button>
+            <button type="button" data-panel="ozmo-ai-video">AI video works</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="visual large" data-label="Hero Visual"></div>
+      </div>
+      <div class="work-panels">
+        <div class="work-panel" id="ozmo-branding">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Ozmo / seçili kategori</p>
+              <h4>Branding</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="ozmo-social">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Ozmo / seçili kategori</p>
+              <h4>Social media</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="ozmo-advertising">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Ozmo / seçili kategori</p>
+              <h4>Advertising</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="ozmo-ai-video">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Ozmo / seçili kategori</p>
+              <h4>AI video works</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="starbucks">
+      <div class="project-head">
+        <div>
+          <p class="project-kicker">02</p>
+          <h3>Starbucks</h3>
+        </div>
+        <div class="project-info">
+          <div class="project-tags" aria-label="Proje kategorileri">
+            <button type="button" data-panel="starbucks-branding">Branding</button>
+            <button type="button" data-panel="starbucks-social">Social media</button>
+            <button type="button" data-panel="starbucks-advertising">Advertising</button>
+            <button type="button" data-panel="starbucks-ai-video">AI video works</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="visual large" data-label="Hero Visual"></div>
+      </div>
+      <div class="work-panels">
+        <div class="work-panel" id="starbucks-branding">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Starbucks / seçili kategori</p>
+              <h4>Branding</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="starbucks-social">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Starbucks / seçili kategori</p>
+              <h4>Social media</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="starbucks-advertising">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Starbucks / seçili kategori</p>
+              <h4>Advertising</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="starbucks-ai-video">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Starbucks / seçili kategori</p>
+              <h4>AI video works</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="biscolata">
+      <div class="project-head">
+        <div>
+          <p class="project-kicker">03</p>
+          <h3>Biscolata</h3>
+        </div>
+        <div class="project-info">
+          <div class="project-tags" aria-label="Proje kategorileri">
+            <button type="button" data-panel="biscolata-branding">Branding</button>
+            <button type="button" data-panel="biscolata-social">Social media</button>
+            <button type="button" data-panel="biscolata-advertising">Advertising</button>
+            <button type="button" data-panel="biscolata-ai-video">AI video works</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="visual large" data-label="Hero Visual"></div>
+      </div>
+      <div class="work-panels">
+        <div class="work-panel" id="biscolata-branding">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Biscolata / seçili kategori</p>
+              <h4>Branding</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="biscolata-social">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Biscolata / seçili kategori</p>
+              <h4>Social media</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="biscolata-advertising">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Biscolata / seçili kategori</p>
+              <h4>Advertising</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="biscolata-ai-video">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">Biscolata / seçili kategori</p>
+              <h4>AI video works</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="project" id="tatilbudur">
+      <div class="project-head">
+        <div>
+          <p class="project-kicker">04</p>
+          <h3>TatilBudur</h3>
+        </div>
+        <div class="project-info">
+          <div class="project-tags" aria-label="Proje kategorileri">
+            <button type="button" data-panel="tatilbudur-branding">Branding</button>
+            <button type="button" data-panel="tatilbudur-social">Social media</button>
+            <button type="button" data-panel="tatilbudur-advertising">Advertising</button>
+            <button type="button" data-panel="tatilbudur-ai-video">AI video works</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="visual large" data-label="Hero Visual"></div>
+      </div>
+      <div class="work-panels">
+        <div class="work-panel" id="tatilbudur-branding">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">TatilBudur / seçili kategori</p>
+              <h4>Branding</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="tatilbudur-social">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">TatilBudur / seçili kategori</p>
+              <h4>Social media</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="tatilbudur-advertising">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">TatilBudur / seçili kategori</p>
+              <h4>Advertising</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+        <div class="work-panel" id="tatilbudur-ai-video">
+          <div class="work-panel-head">
+            <div>
+              <p class="eyebrow">TatilBudur / seçili kategori</p>
+              <h4>AI video works</h4>
+            </div>
+            <p>Buraya bu kategoriye ait görsel, video, kampanya çıktısı veya case study işlerini yükleyeceğiz.</p>
+          </div>
+          <div class="work-gallery">
+            <div class="work-slot tall">Büyük iş alanı</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+            <div class="work-slot">Görsel / video</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow">İletişim</p>
+    <h2>Yeni projeler için iletişime geçelim.</h2>
+    <p>Portfolyo, freelance işler, iş birlikleri veya kreatif projeler için bana mail ya da Behance üzerinden ulaşabilirsin.</p>
+    <div class="contact-links">
+      <a class="btn" href="mailto:mitsabtw@gmail.com">mitsabtw@gmail.com</a>
+      <a class="btn" href="https://behance.net/keremsarolu" target="_blank" rel="noopener">Behance</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>© 2026 Kerem Sarıoğlu — Art Director</footer>
+
+
+<script>
+document.querySelectorAll('.project-tags button').forEach((button) => {
+  button.addEventListener('click', () => {
+    const project = button.closest('.project');
+    const target = project.querySelector('#' + button.dataset.panel);
+
+    project.querySelectorAll('.project-tags button').forEach((item) => item.classList.remove('active'));
+    project.querySelectorAll('.work-panel').forEach((panel) => panel.classList.remove('active'));
+
+    button.classList.add('active');
+    target.classList.add('active');
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
