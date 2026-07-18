@@ -94,13 +94,12 @@ section{scroll-margin-top:100px}
 
 /* HERO */
 .hero{
-  min-height:100vh;
   display:grid;
   grid-template-columns:.9fr 1.1fr;
-  gap:84px;
+  gap:64px 84px;
   align-items:center;
-  padding-top:88px;
-  padding-bottom:56px;
+  padding-top:118px;
+  padding-bottom:86px;
 }
 .hero h1{
   font-size:clamp(4rem,8vw,8.2rem);
@@ -151,9 +150,11 @@ section{scroll-margin-top:100px}
   line-height:1.45;
 }
 .scroll-work{
-  grid-column:1 / -1;
-  justify-self:center;
-  margin:22px auto 0;
+  position:absolute;
+  left:50%;
+  bottom:-28px;
+  z-index:5;
+  transform:translateX(-50%);
   width:max-content;
   display:flex;
   align-items:center;
@@ -165,6 +166,45 @@ section{scroll-margin-top:100px}
   font-weight:600;
   box-shadow:0 16px 40px rgba(20,20,20,.08);
   transition:transform .22s ease,background .22s ease,color .22s ease;
+}
+.hero-showcase{
+  position:relative;
+  grid-column:1 / -1;
+  min-height:390px;
+  margin-top:4px;
+  border:1px solid var(--line);
+  overflow:visible;
+  background:
+    radial-gradient(circle at 76% 28%,rgba(20,20,20,.1),transparent 28%),
+    linear-gradient(135deg,#eeece6,#d9d6ce);
+}
+.hero-showcase::before{
+  content:"Selected work / Hero visual";
+  position:absolute;
+  left:28px;
+  top:26px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.68rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+.hero-showcase::after{
+  content:"Görselini daha sonra buraya ekleyeceğiz";
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  text-align:center;
+  font-family:Fraunces,serif;
+  font-size:clamp(2rem,4vw,4.4rem);
+  line-height:.95;
+  color:rgba(20,20,20,.55);
+}
+.hero-showcase .scroll-work:hover{
+  transform:translateX(-50%) translateY(-2px);
 }
 .scroll-work span{
   font-size:1rem;
@@ -184,7 +224,7 @@ section{scroll-margin-top:100px}
   transition:.22s;
 }
 .scroll-work:hover{
-  transform:translateY(-2px);
+  transform:translateX(-50%) translateY(-2px);
   background:var(--ink);
   color:var(--bg);
 }
@@ -194,153 +234,224 @@ section{scroll-margin-top:100px}
   color:var(--ink);
 }
 
-/* PROJECTS */
+
+/* WORK CATEGORIES */
 .projects{
-  padding:70px 0 120px;
+  padding:76px 0 120px;
 }
 .projects-title{
   display:flex;
-  justify-content:center;
-  margin-bottom:54px;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:32px;
+  margin-bottom:38px;
 }
 .projects-title h2{
   font-size:clamp(2.7rem,6vw,5.6rem);
   line-height:.9;
 }
+.projects-intro{
+  color:var(--soft);
+  line-height:1.65;
+  max-width:40ch;
+}
 
-.project{
-  border-top:1px solid var(--line);
-  padding:48px 0 70px;
-}
-.project-head{
+.category-grid{
   display:grid;
-  grid-template-columns:.7fr 1.3fr;
-  gap:60px;
-  margin-bottom:26px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:16px;
 }
-.project-kicker{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:.7rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:var(--soft);
-}
-.project h3{
-  font-size:clamp(2.4rem,5vw,4.8rem);
-  line-height:.92;
-}
-.project-info{
-  color:var(--soft);
-  line-height:1.7;
-  max-width:58ch;
-}
-.project-info p{font-size:1rem;color:var(--soft);line-height:1.7;max-width:36ch}
-.project-grid{display:block}
-.visual{
-  min-height:320px;
-  background:linear-gradient(150deg,#f3f1ec,#e7e4db);
+.category-card{
+  appearance:none;
   position:relative;
-  overflow:hidden;
-}
-.visual.large{
-  min-height:520px;
-}
-.project-open{
-  width:100%;
-  border:0;
+  min-height:310px;
+  border:1px solid var(--line);
+  background:#f8f7f3;
+  color:var(--ink);
+  padding:30px;
+  text-align:left;
   cursor:pointer;
-  text-align:center;
-  display:block;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  transition:
+    transform .28s ease,
+    border-color .28s ease,
+    background .28s ease,
+    color .28s ease;
 }
-.project-open span{
-  position:absolute;
-  left:50%;
-  bottom:34px;
-  transform:translateX(-50%);
-  z-index:2;
-  background:var(--ink);
-  color:var(--bg);
-  border-radius:999px;
-  padding:14px 22px;
-  font:600 .95rem/1 Inter,sans-serif;
-  box-shadow:0 18px 40px rgba(20,20,20,.18);
-  transition:transform .22s ease,background .22s ease,color .22s ease;
+.category-card:last-child{
+  grid-column:1 / -1;
+  min-height:250px;
 }
-.project-open:hover span{transform:translateX(-50%) translateY(-3px)}
-.visual::after{
-  content:attr(data-label);
+.category-card::before{
+  content:"";
   position:absolute;
   inset:0;
+  background:
+    radial-gradient(circle at 88% 18%,rgba(20,20,20,.08),transparent 32%),
+    linear-gradient(145deg,transparent,rgba(20,20,20,.04));
+  opacity:.5;
+  transition:opacity .28s ease,transform .4s ease;
+}
+.category-card::after{
+  content:"↗";
+  position:absolute;
+  right:28px;
+  bottom:25px;
+  width:48px;
+  height:48px;
+  border:1px solid currentColor;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.15rem;
+  transition:background .25s ease,color .25s ease,transform .25s ease;
+}
+.category-card:hover,
+.category-card.active{
+  transform:translateY(-4px);
+  border-color:var(--ink);
+  background:var(--ink);
+  color:var(--bg);
+}
+.category-card:hover::before,
+.category-card.active::before{
+  opacity:.16;
+  transform:scale(1.06);
+}
+.category-card:hover::after,
+.category-card.active::after{
+  background:var(--bg);
+  color:var(--ink);
+  transform:rotate(45deg);
+}
+.category-number{
+  position:absolute;
+  z-index:2;
+  top:30px;
+  right:30px;
+  width:44px;
+  height:44px;
+  border:1px solid currentColor;
+  border-radius:50%;
   display:flex;
   align-items:center;
   justify-content:center;
   font-family:'IBM Plex Mono',monospace;
-  font-size:.72rem;
-  letter-spacing:.05em;
-  text-transform:uppercase;
-  color:var(--soft);
-  transition:transform .35s ease;
+  font-size:.68rem;
+  letter-spacing:.04em;
+  color:inherit;
+  opacity:.7;
+  transition:background .25s ease,color .25s ease,opacity .25s ease;
 }
-.visual::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(20,20,20,.025);
+.category-card:hover .category-number,
+.category-card.active .category-number{
+  background:var(--bg);
+  color:var(--ink);
+  opacity:1;
 }
-.visual:hover::after{transform:scale(1.05)}
+.category-card h3{
+  position:relative;
+  z-index:1;
+  max-width:11ch;
+  margin:0 0 26px;
+  font-size:clamp(2.1rem,4.4vw,4.7rem);
+  line-height:.92;
+}
+.category-card:last-child h3{
+  max-width:none;
+  margin:0 0 26px;
+}
+.category-card p{
+  position:relative;
+  z-index:1;
+  left:auto;
+  bottom:auto;
+  max-width:34ch;
+  padding-right:78px;
+  color:inherit;
+  opacity:.68;
+  line-height:1.55;
+}
+.category-card:last-child p{
+  max-width:48ch;
+}
 
-
-.work-panels{
-  margin-top:18px;
-}
-.work-panel{
+.category-detail{
   display:none;
+  margin-top:18px;
   border:1px solid var(--line);
   background:#fbfaf7;
-  padding:28px;
+  padding:0 34px 34px;
+  opacity:0;
+  transform:translateY(18px);
 }
-.work-panel.active{
+.category-detail.active{
   display:block;
-  animation:panelIn .32s ease both;
+  animation:panelOpen .48s cubic-bezier(.2,.75,.25,1) forwards;
 }
-@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
-.work-panel-head{
-  display:flex;
-  justify-content:space-between;
-  gap:20px;
-  align-items:flex-end;
-  margin-bottom:22px;
+.category-detail.closing{
+  display:block;
+  animation:panelClose .28s ease forwards;
+}
+@keyframes panelOpen{
+  from{opacity:0;transform:translateY(18px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes panelClose{
+  from{opacity:1;transform:translateY(0)}
+  to{opacity:0;transform:translateY(10px)}
+}
+.category-detail-head{
+  display:block;
+  margin:0 0 30px;
+  padding-top:34px;
+}
+.category-detail h4{
+  margin-top:8px;
+  font-family:Fraunces,serif;
+  font-size:clamp(2rem,4vw,4rem);
+  line-height:.92;
+}
+.category-detail-copy{
+  color:var(--soft);
+  line-height:1.65;
+  max-width:48ch;
 }
 .panel-close{
   appearance:none;
+  position:sticky;
+  top:88px;
+  z-index:30;
+  display:block;
+  width:max-content;
+  margin:18px 0 0 auto;
   border:1px solid var(--ink);
-  background:transparent;
-  color:var(--ink);
+  background:var(--ink);
+  color:var(--bg);
   border-radius:999px;
-  padding:10px 16px;
+  padding:12px 18px;
   font:600 .85rem/1 Inter,sans-serif;
   cursor:pointer;
-  transition:.2s ease;
+  box-shadow:0 8px 28px rgba(20,20,20,.12);
+  transition:transform .2s ease,background .2s ease,color .2s ease;
 }
-.panel-close:hover{background:var(--ink);color:var(--bg)}
-.work-panel h4{
-  font-family:Fraunces,serif;
-  font-size:clamp(1.8rem,3vw,3rem);
-  font-weight:600;
-  letter-spacing:-.02em;
+.panel-close:hover{
+  background:var(--bg);
+  color:var(--ink);
+  transform:translateY(-2px);
 }
-.work-panel p{
-  color:var(--soft);
-  line-height:1.6;
-  max-width:48ch;
-}
-.work-gallery{
+.category-gallery{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-auto-rows:210px;
   gap:14px;
 }
 .work-slot{
-  min-height:220px;
+  grid-column:span 4;
   border:1px dashed rgba(20,20,20,.22);
   background:#fff;
   display:flex;
@@ -348,10 +459,132 @@ section{scroll-margin-top:100px}
   justify-content:center;
   color:var(--soft);
   font-size:.9rem;
+  text-align:center;
+  padding:20px;
+  transition:background .25s ease,border-color .25s ease,transform .25s ease;
+}
+.work-slot:hover{
+  background:#f5f3ee;
+  border-color:rgba(20,20,20,.42);
+  transform:translateY(-2px);
+}
+.work-slot.featured{
+  grid-column:span 7;
+  grid-row:span 2;
 }
 .work-slot.tall{
-  min-height:320px;
+  grid-column:span 5;
   grid-row:span 2;
+}
+.work-slot.wide{
+  grid-column:span 8;
+}
+.work-slot.small{
+  grid-column:span 4;
+}
+.work-slot.full{
+  grid-column:1 / -1;
+  min-height:300px;
+}
+
+
+/* OZMO SOCIAL MEDIA PROJECT */
+.social-project{
+  margin-top:28px;
+  border:1px solid var(--line);
+  background:#fff;
+  padding:26px;
+}
+.social-project-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:28px;
+  margin-bottom:24px;
+}
+.social-project-head h3{
+  font-family:Fraunces,serif;
+  font-size:clamp(2.2rem,4vw,4.4rem);
+  line-height:.92;
+  margin-top:8px;
+}
+.social-project-copy{
+  max-width:44ch;
+  color:var(--soft);
+  line-height:1.65;
+}
+.ozmo-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:16px;
+}
+.ozmo-item{
+  appearance:none;
+  border:0;
+  padding:0;
+  position:relative;
+  overflow:hidden;
+  background:#f2f2f2;
+  aspect-ratio:4/5;
+  cursor:zoom-in;
+}
+.ozmo-item img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  transition:transform .45s cubic-bezier(.2,.75,.25,1);
+}
+.ozmo-item:hover img{transform:scale(1.025)}
+.ozmo-item span{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:rgba(255,255,255,.9);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.66rem;
+  color:var(--ink);
+  backdrop-filter:blur(8px);
+}
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  background:rgba(10,10,10,.92);
+}
+.lightbox.active{display:flex}
+.lightbox img{
+  max-width:min(1100px,92vw);
+  max-height:88vh;
+  object-fit:contain;
+}
+.lightbox-close{
+  position:absolute;
+  top:22px;
+  right:22px;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,255,255,.5);
+  border-radius:50%;
+  background:transparent;
+  color:#fff;
+  font-size:1.25rem;
+  cursor:pointer;
+}
+@media(max-width:760px){
+  .social-project{padding:18px}
+  .social-project-head{flex-direction:column;align-items:flex-start}
+  .ozmo-grid{grid-template-columns:1fr}
 }
 
 /* CONTACT */
@@ -395,6 +628,21 @@ footer{
 }
 
 @media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:36px;padding-top:100px}
+  .hero-showcase{min-height:330px}
+  .projects-title{align-items:flex-start;flex-direction:column}
+  .category-grid{grid-template-columns:1fr}
+  .category-card:last-child{grid-column:auto}
+  .category-gallery{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:220px}
+  .work-slot,
+  .work-slot.small,
+  .work-slot.wide,
+  .work-slot.featured,
+  .work-slot.tall{grid-column:span 1;grid-row:auto}
+  .work-slot.featured,
+  .work-slot.tall{min-height:330px}
+  .work-slot.full{grid-column:1 / -1}
+
   nav ul{gap:4px}
   nav a{font-size:.9rem;min-width:auto;padding:10px 14px}
   .work-gallery{grid-template-columns:1fr 1fr}
@@ -412,6 +660,31 @@ footer{
 }
 
 @media(max-width:560px){
+  .hero{padding-top:90px;padding-bottom:76px}
+  .hero-showcase{min-height:270px}
+  .hero-showcase::after{font-size:2rem;padding:50px 24px}
+  .category-card,
+  .category-card:last-child{min-height:270px;padding:24px}
+  .category-number{top:24px;right:24px;width:40px;height:40px}
+  .category-card h3,
+  .category-card:last-child h3{margin:0 0 22px}
+  .category-card p{padding-right:64px}
+  .category-card::after{right:22px;bottom:22px}
+  .category-detail{padding:0 22px 22px}
+  .category-detail-head{margin:0 0 24px;padding-top:24px}
+  .category-detail-head h4{font-size:2rem}
+  .panel-close{top:72px;margin-top:14px}
+  .category-gallery{grid-template-columns:1fr}
+  .work-slot,
+  .work-slot.small,
+  .work-slot.featured,
+  .work-slot.tall,
+  .work-slot.wide,
+  .work-slot.full{grid-column:auto;min-height:260px}
+  .work-slot.featured,
+  .work-slot.tall,
+  .work-slot.full{min-height:360px}
+
   .wrap{padding:0 22px}
   .nav-inner{padding:20px 22px}
   nav ul{gap:2px}
@@ -465,140 +738,186 @@ footer{
     </div>
   </div>
 
-  <a class="scroll-work" href="#projects"><span>İşlerime git</span><b>↓</b></a>
+  <div class="hero-showcase">
+    <a class="scroll-work" href="#projects"><span>İşlerime git</span><b>↓</b></a>
+  </div>
 </section>
 
+
 <section class="projects" id="projects">
-  <div class="wrap projects-title">
-    <h2>İşlerim</h2>
+  <div class="wrap">
+    <div class="projects-title">
+      <div>
+        <h2>İşlerim</h2>
+      </div>
+      
+    </div>
+
+    <div class="category-grid">
+      <button class="category-card" type="button" data-category="social-media" aria-expanded="false">
+        <span class="category-number">01</span>
+        <h3>Social Media</h3>
+        <p>Sosyal medya kampanyaları, post sistemleri, story ve dijital içerik üretimleri.</p>
+      </button>
+
+      <button class="category-card" type="button" data-category="branding" aria-expanded="false">
+        <span class="category-number">02</span>
+        <h3>Branding</h3>
+        <p>Markanın görsel dilini taşıyan yaratıcı sistemler, kampanya evrenleri ve tasarım yaklaşımı.</p>
+      </button>
+
+      <button class="category-card" type="button" data-category="advertising" aria-expanded="false">
+        <span class="category-number">03</span>
+        <h3>Advertising</h3>
+        <p>Key visual, outdoor, dijital reklam ve farklı mecralara uyarlanan kampanya çalışmaları.</p>
+      </button>
+
+      <button class="category-card" type="button" data-category="brand-identity" aria-expanded="false">
+        <span class="category-number">04</span>
+        <h3>Brand Identity</h3>
+        <p>Logo, tipografi, renk sistemi ve bütünlüklü marka kimliği uygulamaları.</p>
+      </button>
+
+      <button class="category-card" type="button" data-category="ai-video" aria-expanded="false">
+        <span class="category-number">05</span>
+        <h3>AI Video Works</h3>
+        <p>Yapay zekâ destekli video üretimleri, motion denemeleri, görsel hikâye anlatımı ve deneysel işler.</p>
+      </button>
+    </div>
+
+    
+<div class="category-detail" data-panel="social-media">
+  <button class="panel-close" type="button">Kapat</button>
+  <div class="category-detail-head">
+    <div>
+      <p class="eyebrow">01 / Seçili kategori</p>
+      <h4>Social Media</h4>
+    </div>
   </div>
 
-  <div class="wrap">
+  <article class="social-project">
+    <div class="social-project-head">
+      <div>
+        <p class="eyebrow">OZMO • Social Media</p>
+        <h3>Selected Campaigns</h3>
+      </div>
+      <p class="social-project-copy">Karne dönemi ve Adventure Land iletişimlerinden seçili sosyal medya tasarımları.</p>
+    </div>
 
-    <article class="project" id="ozmo">
-      <div class="project-head">
+    <div class="ozmo-grid">
+      <button class="ozmo-item" type="button" data-image="assets/sm/ozmo/Artboard 1.jpg">
+        <img src="assets/sm/ozmo/Artboard 1.jpg" alt="OZMO sosyal medya çalışması 1" loading="lazy">
+        <span>01</span>
+      </button>
+
+      <button class="ozmo-item" type="button" data-image="assets/sm/ozmo/Artboard 1 copy.jpg">
+        <img src="assets/sm/ozmo/Artboard 1 copy.jpg" alt="OZMO sosyal medya çalışması 2" loading="lazy">
+        <span>02</span>
+      </button>
+
+      <button class="ozmo-item" type="button" data-image="assets/sm/ozmo/Artboard 1 copy 2.jpg">
+        <img src="assets/sm/ozmo/Artboard 1 copy 2.jpg" alt="OZMO sosyal medya çalışması 3" loading="lazy">
+        <span>03</span>
+      </button>
+    </div>
+  </article>
+</div>
+
+<div class="category-detail" data-panel="branding">
+      <button class="panel-close" type="button">Kapat</button>
+      <div class="category-detail-head">
         <div>
-          <p class="project-kicker">01</p>
-          <h3>Ozmo</h3>
-        </div>
-        <div class="project-info"><p>Bu markaya ait işleri görmek için hero visual alanını aç.</p></div>
-      </div>
-      <div class="project-grid">
-        <button class="visual large project-open" type="button" data-label="Hero Visual"><span>Bu markanın işlerini gör</span></button>
-      </div>
-      <div class="work-panels">
-        <div class="work-panel">
-          <div class="work-panel-head">
-            <div>
-              <p class="eyebrow">Ozmo / işler</p>
-              <h4>Ozmo işleri</h4>
-            </div>
-            <button class="panel-close" type="button" aria-label="Kapat">Kapat</button>
-          </div>
-          <div class="work-gallery">
-            <div class="work-slot tall">Büyük iş alanı</div>
-            <div class="work-slot">ozmo-01 / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-          </div>
+          <p class="eyebrow">02 / Seçili kategori</p>
+          <h4>Branding</h4>
         </div>
       </div>
-    </article>
+      <p class="category-detail-copy">Marka dünyası, kreatif yön, görsel sistem ve farklı temas noktalarındaki tasarım uygulamalarını burada sergileyebiliriz.</p>
+      <div class="category-gallery">
+        <div class="work-slot featured">Öne çıkan branding projesi</div>
+        <div class="work-slot small">Görsel sistem</div>
+        <div class="work-slot small">Uygulama örneği</div>
+        <div class="work-slot wide">Marka dünyası / kampanya evreni</div>
+        <div class="work-slot small">Tipografik yaklaşım</div>
+        <div class="work-slot small">Ambalaj / ürün dili</div>
+        <div class="work-slot tall">İkon ve illüstrasyon sistemi</div>
+        <div class="work-slot small">Fiziksel uygulamalar</div>
+        <div class="work-slot wide">Brand guideline detayları</div>
+        <div class="work-slot full">Branding proje kapanışı</div>
+      </div>
+      </div>
+    </div>
 
-    <article class="project" id="starbucks">
-      <div class="project-head">
+    <div class="category-detail" data-panel="advertising">
+      <button class="panel-close" type="button">Kapat</button>
+      <div class="category-detail-head">
         <div>
-          <p class="project-kicker">02</p>
-          <h3>Starbucks</h3>
-        </div>
-        <div class="project-info"><p>Bu markaya ait işleri görmek için hero visual alanını aç.</p></div>
-      </div>
-      <div class="project-grid">
-        <button class="visual large project-open" type="button" data-label="Hero Visual"><span>Bu markanın işlerini gör</span></button>
-      </div>
-      <div class="work-panels">
-        <div class="work-panel">
-          <div class="work-panel-head">
-            <div>
-              <p class="eyebrow">Starbucks / işler</p>
-              <h4>Starbucks işleri</h4>
-            </div>
-            <button class="panel-close" type="button" aria-label="Kapat">Kapat</button>
-          </div>
-          <div class="work-gallery">
-            <div class="work-slot tall">Büyük iş alanı</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-          </div>
+          <p class="eyebrow">03 / Seçili kategori</p>
+          <h4>Advertising</h4>
         </div>
       </div>
-    </article>
+      <p class="category-detail-copy">Kampanya key visual'ları, outdoor uygulamaları, dijital reklamlar ve mecralara göre hazırlanan adaptasyonları burada gösterebiliriz.</p>
+      <div class="category-gallery">
+        <div class="work-slot featured">Ana kampanya görseli</div>
+        <div class="work-slot small">Outdoor</div>
+        <div class="work-slot small">Dijital reklam</div>
+        <div class="work-slot wide">Kampanya adaptasyonları</div>
+        <div class="work-slot small">Billboard uygulaması</div>
+        <div class="work-slot small">Display banner sistemi</div>
+        <div class="work-slot tall">Ürün key visual</div>
+        <div class="work-slot small">Dijital film karesi</div>
+        <div class="work-slot wide">Farklı mecra uygulamaları</div>
+        <div class="work-slot full">Kampanya proje kapanışı</div>
+      </div>
+      </div>
+    </div>
 
-    <article class="project" id="biscolata">
-      <div class="project-head">
+    <div class="category-detail" data-panel="brand-identity">
+      <button class="panel-close" type="button">Kapat</button>
+      <div class="category-detail-head">
         <div>
-          <p class="project-kicker">03</p>
-          <h3>Biscolata</h3>
-        </div>
-        <div class="project-info"><p>Bu markaya ait işleri görmek için hero visual alanını aç.</p></div>
-      </div>
-      <div class="project-grid">
-        <button class="visual large project-open" type="button" data-label="Hero Visual"><span>Bu markanın işlerini gör</span></button>
-      </div>
-      <div class="work-panels">
-        <div class="work-panel">
-          <div class="work-panel-head">
-            <div>
-              <p class="eyebrow">Biscolata / işler</p>
-              <h4>Biscolata işleri</h4>
-            </div>
-            <button class="panel-close" type="button" aria-label="Kapat">Kapat</button>
-          </div>
-          <div class="work-gallery">
-            <div class="work-slot tall">Büyük iş alanı</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-          </div>
+          <p class="eyebrow">04 / Seçili kategori</p>
+          <h4>Brand Identity</h4>
         </div>
       </div>
-    </article>
+      <p class="category-detail-copy">Logo, tipografik yapı, renk paleti, ikonografi ve kimlik uygulamalarını bir case study akışıyla burada sergileyebiliriz.</p>
+      <div class="category-gallery">
+        <div class="work-slot featured">Kimlik ana sunumu</div>
+        <div class="work-slot small">Logo sistemi</div>
+        <div class="work-slot small">Tipografi / renk</div>
+        <div class="work-slot wide">Kurumsal uygulamalar</div>
+        <div class="work-slot small">Logo varyasyonları</div>
+        <div class="work-slot small">Renk paleti</div>
+        <div class="work-slot tall">İkonografi</div>
+        <div class="work-slot small">Kartvizit / basılı materyal</div>
+        <div class="work-slot wide">Dijital kimlik uygulamaları</div>
+        <div class="work-slot full">Kimlik proje kapanışı</div>
+      </div>
+      </div>
+    </div>
 
-    <article class="project" id="tatilbudur">
-      <div class="project-head">
+    <div class="category-detail" data-panel="ai-video">
+      <button class="panel-close" type="button">Kapat</button>
+      <div class="category-detail-head">
         <div>
-          <p class="project-kicker">04</p>
-          <h3>TatilBudur</h3>
-        </div>
-        <div class="project-info"><p>Bu markaya ait işleri görmek için hero visual alanını aç.</p></div>
-      </div>
-      <div class="project-grid">
-        <button class="visual large project-open" type="button" data-label="Hero Visual"><span>Bu markanın işlerini gör</span></button>
-      </div>
-      <div class="work-panels">
-        <div class="work-panel">
-          <div class="work-panel-head">
-            <div>
-              <p class="eyebrow">TatilBudur / işler</p>
-              <h4>TatilBudur işleri</h4>
-            </div>
-            <button class="panel-close" type="button" aria-label="Kapat">Kapat</button>
-          </div>
-          <div class="work-gallery">
-            <div class="work-slot tall">Büyük iş alanı</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-            <div class="work-slot">Görsel / video</div>
-          </div>
+          <p class="eyebrow">05 / Seçili kategori</p>
+          <h4>AI Video Works</h4>
         </div>
       </div>
-    </article>
-
+      <p class="category-detail-copy">AI destekli videolar, hareketli görseller, kısa film denemeleri ve müzikle senkronize yaratıcı video çalışmalarını burada gösterebiliriz.</p>
+      <div class="category-gallery">
+        <div class="work-slot featured">Öne çıkan AI video</div>
+        <div class="work-slot small">Video karesi</div>
+        <div class="work-slot small">Motion denemesi</div>
+        <div class="work-slot wide">Video / kısa film akışı</div>
+        <div class="work-slot small">Storyboard kareleri</div>
+        <div class="work-slot small">Karakter ve dünya tasarımı</div>
+        <div class="work-slot tall">Geçiş / hareket denemeleri</div>
+        <div class="work-slot small">Müzik senkronlu bölüm</div>
+        <div class="work-slot wide">Final video seçkisi</div>
+        <div class="work-slot full">AI video proje kapanışı</div>
+      </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -616,32 +935,128 @@ footer{
 
 </main>
 
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" type="button" aria-label="Görseli kapat">×</button>
+  <img src="" alt="Büyütülmüş proje görseli">
+</div>
+
 <footer>© 2026 Kerem Sarıoğlu — Art Director</footer>
 
 
+
+
 <script>
-document.querySelectorAll('.project-open').forEach((button) => {
-  button.addEventListener('click', () => {
-    const project = button.closest('.project');
-    const panel = project.querySelector('.work-panel');
-    const isOpen = panel.classList.contains('active');
+const categoryButtons = document.querySelectorAll('.category-card');
+const categoryPanels = document.querySelectorAll('.category-detail');
 
-    document.querySelectorAll('.work-panel').forEach((item) => item.classList.remove('active'));
+function resetButtons() {
+  categoryButtons.forEach((button) => {
+    button.classList.remove('active');
+    button.setAttribute('aria-expanded', 'false');
+  });
+}
 
-    if (!isOpen) {
-      panel.classList.add('active');
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function hidePanel(panel, callback) {
+  if (!panel || !panel.classList.contains('active')) {
+    if (callback) callback();
+    return;
+  }
+
+  panel.classList.remove('active');
+  panel.classList.add('closing');
+
+  window.setTimeout(() => {
+    panel.classList.remove('closing');
+    if (callback) callback();
+  }, 280);
+}
+
+function closeAllPanels(exceptPanel = null) {
+  categoryPanels.forEach((panel) => {
+    if (panel !== exceptPanel) {
+      panel.classList.remove('active', 'closing');
     }
+  });
+  resetButtons();
+}
+
+categoryButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const category = button.dataset.category;
+    const panel = document.querySelector(`[data-panel="${category}"]`);
+    const isOpen = button.classList.contains('active');
+
+    if (isOpen) {
+      hidePanel(panel);
+      button.classList.remove('active');
+      button.setAttribute('aria-expanded', 'false');
+      return;
+    }
+
+    closeAllPanels(panel);
+
+    button.classList.add('active');
+    button.setAttribute('aria-expanded', 'true');
+    panel.classList.remove('closing');
+    panel.classList.add('active');
+
+    window.setTimeout(() => {
+      panel.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 40);
   });
 });
 
 document.querySelectorAll('.panel-close').forEach((button) => {
   button.addEventListener('click', () => {
-    const project = button.closest('.project');
-    project.querySelector('.work-panel').classList.remove('active');
-    project.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const panel = button.closest('.category-detail');
+    const category = panel.dataset.panel;
+    const trigger = document.querySelector(`[data-category="${category}"]`);
+
+    hidePanel(panel, () => {
+      if (trigger) {
+        trigger.classList.remove('active');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+
+      document.querySelector('.category-grid').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
   });
 });
+
+const lightbox = document.getElementById('lightbox');
+const lightboxImage = lightbox.querySelector('img');
+
+document.querySelectorAll('.ozmo-item').forEach((item) => {
+  item.addEventListener('click', () => {
+    lightboxImage.src = item.dataset.image;
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeLightbox() {
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightboxImage.src = '';
+  document.body.style.overflow = '';
+}
+
+lightbox.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (event) => {
+  if (event.target === lightbox) closeLightbox();
+});
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
+});
+
 </script>
+
 </body>
 </html>
